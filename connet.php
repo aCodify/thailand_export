@@ -8,7 +8,7 @@ define('ABSURL', DOMAIN );
 define('DATABASE_HOSTNAME', 'localhost');
 define('DATABASE_USERNAME', 'root');
 define('DATABASE_PASSWORD', 'password');
-define('DATABASE_NAM', 'thailandindustrialfair');
+define('DATABASE_NAM', 'AAA');
 
 
 

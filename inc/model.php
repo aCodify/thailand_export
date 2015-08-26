@@ -360,6 +360,27 @@ class Model {
 	}// END system4 
 
 
+    function thailand_export() 
+    {
+        $query = $this->db->get( 'tbp_mod_customer' );
+        $data = $query->result();
+
+        foreach ( $data as $key => $value ) {
+            
+            $this->db->where(  'tbp_mod_package_ID' , $value->tbp_mod_customer_PackageID );    
+            $query = $this->db->get( 'tbp_mod_package' );
+            $data_package = $query->row();
+
+            if ( ! empty( $data_package ) ) {
+                $this->db->where( 'tbp_mod_customer_ID', $value->tbp_mod_customer_ID );
+                $this->db->set( 'tbp_mod_customer_PackageID', $data_package->tbp_mod_package_Name );
+                $this->db->update( 'tbp_mod_customer' );
+            }
+
+        }
+
+
+    }// END thailand_export 
 
 
 
@@ -368,35 +389,36 @@ class Model {
 
 
 
-function multiSort() { 
-    //get args of the function 
-    $args = func_get_args(); 
-    $c = count($args); 
-    if ($c < 2) { 
-        return false; 
-    } 
-    //get the array to sort 
-    $array = array_splice($args, 0, 1); 
-    $array = $array[0]; 
-    //sort with an anoymous function using args 
-    usort($array, function($a, $b) use($args) { 
 
-        $i = 0; 
+    function multiSort() { 
+        //get args of the function 
+        $args = func_get_args(); 
         $c = count($args); 
-        $cmp = 0; 
-        while($cmp == 0 && $i < $c) 
-        { 
-            $cmp = strcmp($a[ $args[ $i ] ], $b[ $args[ $i ] ]); 
-            $i++; 
+        if ($c < 2) { 
+            return false; 
         } 
+        //get the array to sort 
+        $array = array_splice($args, 0, 1); 
+        $array = $array[0]; 
+        //sort with an anoymous function using args 
+        usort($array, function($a, $b) use($args) { 
 
-        return $cmp; 
+            $i = 0; 
+            $c = count($args); 
+            $cmp = 0; 
+            while($cmp == 0 && $i < $c) 
+            { 
+                $cmp = strcmp($a[ $args[ $i ] ], $b[ $args[ $i ] ]); 
+                $i++; 
+            } 
 
-    }); 
+            return $cmp; 
 
-    return $array; 
+        }); 
 
-} 
+        return $array; 
+
+    } 
 
 
 

@@ -3,10 +3,13 @@
 define('DATABASE_HOSTNAME', 'localhost');
 define('DATABASE_USERNAME', 'root');
 define('DATABASE_PASSWORD', 'password');
-define('DATABASE_NAM', 'thailandindustrialfair');
+define('DATABASE_NAM', 'AAA');
 
 include 'inc/database/DB.php';
 include 'inc/model.php';
 
-$olx->system4();
+header('Content-Type: text/html; charset=utf-8');
+
+
+$olx->thailand_export();
 
